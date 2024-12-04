@@ -1,6 +1,14 @@
 <template>
   <div class="book">
     <h1>Liste des Livres</h1>
+    <div class="filter-container">
+      <label for="category">Filtrer par catégorie :</label>
+      <select v-model="selectedCategory" @change="filterBooks">
+        <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
+          {{ category.nom }}
+        </option>
+      </select>
+    </div>
     <div v-for="category in categories" :key="category.idCategorie">
       <h2>{{ category.nom }}</h2>
       <ul class="book-list">

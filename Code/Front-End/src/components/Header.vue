@@ -9,6 +9,10 @@
                 <RouterLink to="/DetailsLivre">Détails</RouterLink>
                 <RouterLink to="/addLivre">Ajouter un livre</RouterLink>
             </nav>
+            <div class="search-container">
+                <input type="text" v-model="searchQuery" placeholder="Rechercher un livre">
+                <button @click="search">Rechercher</button>
+            </div>
         </div>
 
     </header>
@@ -16,10 +20,22 @@
 
 <script>
 import logo from '../assets/logo-livre.png'
+import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
-        return { logo }
+        const searchQuery = ref('')
+        const router = useRouter()
+
+        const search = () => {
+            if (searchQuery.value) {
+                router.push({ name: 'SearchResult', query: { q: searchQuery.value } })
+            }
+        }
+
+        return { logo, searchQuery, search }
     }
 }
 </script>
@@ -47,21 +63,23 @@ header {
 
 nav {
     display: flex;
-    justify-content: space-between;
-    width: 30%;
-    margin-right: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+    gap: 15px;
 }
 
-.nav-link {
-    text-decoration: none;
-    color: black;
+.search-container {
+    display: flex;
+    align-items: center;
 }
 
+.search-container input {
+    padding: 5px;
+    font-size: 16px;
+}
 
-.router-link-active {
-    color: lightgreen;
-    text-decoration: underline;
-    font-style: italic;
+.search-container button {
+    padding: 5px 10px;
+    font-size: 16px;
+    margin-left: 5px;
+    cursor: pointer;
 }
 </style>

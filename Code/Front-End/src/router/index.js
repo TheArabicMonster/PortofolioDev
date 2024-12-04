@@ -5,6 +5,7 @@ import AboutView from '../views/Total/addLivre.vue';
 import Home from '../views/Total/Home.vue';
 import loginPage from '../views/Total/loginPage.vue';
 import BookList from '../views/Partial/BookList.vue';
+import SearchResult from '@/views/Total/SearchResult.vue';
 
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/books',
       name: 'BookList',
       component: BookList
+    },
+    {
+      path: '/search',
+      name: 'SearchResult',
+      component: SearchResult
     }
   ]
 });

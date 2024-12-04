@@ -4,6 +4,7 @@
     <div class="filter-container">
       <label for="category">Filtrer par catégorie :</label>
       <select v-model="selectedCategory" @change="filterBooks">
+        <option value="">Toutes les catégories</option>
         <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
           {{ category.nom }}
         </option>
@@ -32,13 +33,19 @@ export default {
     return {
       books: [],
       categories: [],
-      authors: []
+      authors: [],
+      selectedCategory: ''
+    }
+  },
+  computed: {
+    filteredBooks() {
+      if (this.selectedCategory) {
+        return this.books.filter(book => book.id_categorie === this.selectedCategory);
+      }
+      return this.books;
     }
   },
   methods: {
-    filteredBooks(idCategorie) {
-      return this.books.filter(book => book.id_categorie === idCategorie);
-    },
     findAuthor(idAuteur) {
       return this.authors.find(author => author.idAuteur === idAuteur);
     }

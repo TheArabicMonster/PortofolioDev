@@ -1,10 +1,10 @@
 <template>
   <div class="book" v-if="catIdSelected == null">
     <h1>Liste des Livres</h1>
-    <div class="filter-container" v-if="_aa == null">
+    <div class="filter-container" v-if="categorySelected == null">
       <form @submit.prevent="getCatIdSelected">
       <label for="categorySelect">Filtrer par catégorie :</label>
-      <select id="categorySelect" class="aa" v-model="_aa">
+      <select id="categorySelect" class="aa" v-model="categorySelected">
         <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
           {{ category.nom }}
         </option>
@@ -16,7 +16,6 @@
        
 
     <div v-if="catIdSelected">
-
       <ul class="book-list">
         <li v-for="book in filteredBooks">
           <img class="book-cover" :src="book.imageCouverture" alt="Couverture du livre">
@@ -46,8 +45,8 @@ export default {
   computed: {
     getCatIdSelected(event){
 
-      if(this._aa){
-      this.catIdSelected = (this._aa)
+      if(this.categorySelected){
+      this.catIdSelected = (this.categorySelected)
       }else{
         this.catIdSelected =2
       }
@@ -57,9 +56,7 @@ export default {
       if (this.catIdSelected) {
         return this.books.filter(book => book.id_categorie === this.catIdSelected);
       }
-      console.log(" BBB "+books[0].id_categorie)
 
-      return this.books;
     }
   },
   methods: {

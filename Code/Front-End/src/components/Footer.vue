@@ -12,7 +12,7 @@
                 <a href="https://www.instagram.com" aria-label="Instagram" target="_blank">
                     <img src="../assets/instagram.png" alt="Instagram">
                 </a>
-                <a href="https://www.linkedin.com/"aria-label="Linkedin" target="_blank">
+                <a href="https://www.linkedin.com/" aria-label="Linkedin" target="_blank">
                     <img src="../assets/linkedin.png" alt="Linkedin">
                 </a>
             </div>
@@ -48,14 +48,14 @@ export default {
 }
 
 p {
-    font-size: 34px;
+    font-size: 24px;
     color: white;
     font-family: 'Roboto', sans-serif;
     margin: 0 10px 0 0;
 }
 
 a {
-    font-size: 34px;
+    font-size: 24px;
     color: white;
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
@@ -85,7 +85,7 @@ a:hover {
     }
 
     p, a {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .social-icons a {

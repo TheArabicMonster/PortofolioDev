@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="search-results">
     <h1>Résultats de recherche pour "{{ $route.query.q }}"</h1>
     <ul>
-      <li v-for="book in filteredBooks" :key="book.idLivre">
-        <img :src="book.imageCouverture" alt="Couverture du livre">
-        <div>
+      <li v-for="book in filteredBooks" :key="book.idLivre" class="book-item">
+        <img :src="book.imageCouverture" alt="Couverture du livre" class="book-cover">
+        <div class="book-info">
           <h3>{{ book.titre }}</h3>
         </div>
       </li>
@@ -40,17 +40,55 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
+.search-results {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
 }
-li {
-  display: flex;
+
+.search-results h1 {
+  text-align: center;
+  color: #333;
   margin-bottom: 20px;
 }
-img {
-  width: 100px;
-  height: 150px;
-  margin-right: 20px;
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.book-item {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: calc(33.333% - 20px);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.book-item:hover {
+  transform: scale(1.05);
+}
+
+.book-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.book-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.book-info h3 {
+  margin: 0;
+  color: #007bff;
+  font-size: 18px;
 }
 </style>

@@ -151,6 +151,7 @@ export default {
     </div>
   </section>
 </template>
+
 <style>
 section {
   display: grid;

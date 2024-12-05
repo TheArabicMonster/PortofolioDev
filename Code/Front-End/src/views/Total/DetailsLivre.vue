@@ -29,6 +29,11 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/api/livres/${id}`)
         this.livres = response.data
+        /* if (this.livres != null) {
+          console.log('aaaa' + this.livres.data.resume);
+        } else {
+          console.log('bbbb');
+        }*/
         await this.getComments(id)
         await this.getAuthors(id)
       } catch (error) {
@@ -171,7 +176,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-firstSelection input[type="submit"] {
+.firstSelection input[type="submit"] {
   background-color: #007bff;
   color: white;
   border: none;

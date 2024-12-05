@@ -1,32 +1,34 @@
 <template>
-  <div class="book" v-if="catIdSelected == null">
+  <div class="book-list-container">
     <h1>Liste des Livres</h1>
-    <div class="filter-container" v-if="categorySelected == null">
+    <div class="filter-container">
       <form @submit.prevent="getCatIdSelected">
-      <label for="categorySelect">Filtrer par catégorie :</label>
-      <select id="categorySelect" class="aa" v-model="categorySelected">
-        <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
-          {{ category.nom }}
-        </option>
-      </select>
-      <input type="submit" value="Recherceher">
-    </form>
+        <label for="categorySelect">Filtrer par catégorie :</label>
+        <select id="categorySelect" class="category-select" v-model="categorySelected">
+          <option value="">Toutes les catégories</option>
+          <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
+            {{ category.nom }}
+          </option>
+        </select>
+        <input type="submit" value="Rechercher" class="submit-button">
+      </form>
     </div>
-  </div>   
-       
 
-    <div v-if="catIdSelected">
+    <div v-if="filteredBooks.length">
       <ul class="book-list">
-        <li v-for="book in filteredBooks">
+        <li v-for="book in filteredBooks" :key="book.idLivre">
           <img class="book-cover" :src="book.imageCouverture" alt="Couverture du livre">
           <div class="book-info">
-            <h3 v-if="book.id_categorie == catIdSelected ">{{ book.titre }}</h3>
+            <h3>{{ book.titre }}</h3>
             <p>{{ findAuthor(book.idAuteur).nom }}</p>
           </div>
         </li>
       </ul>
     </div>
-
+    <div v-else>
+      <p>Aucun livre trouvé pour cette catégorie.</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,91 +40,147 @@ export default {
       books: [],
       categories: [],
       authors: [],
-      selectedCategory: '',
-      catIdSelected: null
-    }
-  },
-  computed: {
-    getCatIdSelected(event){
-
-      if(this.categorySelected){
-      this.catIdSelected = (this.categorySelected)
-      }else{
-        this.catIdSelected =2
-      }
-      console.log("cat id : "+this.catIdSelected)
-    },
-    filteredBooks() {
-      if (this.catIdSelected) {
-        return this.books.filter(book => book.id_categorie === this.catIdSelected);
-      }
-
+      categorySelected: ''
     }
   },
   methods: {
+    async getCatIdSelected() {
+      // La méthode est vide car nous utilisons la computed property filteredBooks
+    },
+    async fetchBooks() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/livres');
+        this.books = response.data.data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des livres :', error);
+      }
+    },
+    async fetchCategories() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/categories');
+        this.categories = response.data.data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des catégories :', error);
+      }
+    },
+    async fetchAuthors() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/auteurs');
+        this.authors = response.data.data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des auteurs :', error);
+      }
+    },
     findAuthor(idAuteur) {
-      return this.authors.find(author => author.idAuteur === idAuteur);
+      return this.authors.find(author => author.idAuteur === idAuteur) || {};
     }
   },
-  mounted() {
-    // Effectuer une requête GET pour récupérer la liste des livres depuis ton API
-    axios
-      .get('http://localhost:3000/api/livres')
-      .then((response) => {
-        this.books = response.data.data
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération des livres :', error)
-      })
-
-    axios
-      .get('http://localhost:3000/api/categories')
-      .then((response) => {
-        this.categories = response.data.data
-        console.log("ABCDE "+response.data.data[0].nom)
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération des catégories :', error)
-      })
-    
-    axios
-      .get('http://localhost:3000/api/auteurs')
-      .then((response) => {
-        this.authors = response.data.data
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération des auteurs :', error)
-      })
+  async mounted() {
+    await this.fetchBooks();
+    await this.fetchCategories();
+    await this.fetchAuthors();
+  },
+  computed: {
+    filteredBooks() {
+      if (this.categorySelected) {
+        return this.books.filter(book => book.id_categorie === this.categorySelected);
+      }
+      return this.books;
+    }
   }
 }
 </script>
 
 <style scoped>
-.book{
-  background-color: #739AAF;
-  padding: 10px;
+.book-list-container {
+  background-color: var(--background-color);
+  padding: 20px;
+  min-height: 100vh;
 }
+
+.book {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.category-select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
 .book-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 20px;
   list-style: none;
   padding: 0;
+  justify-content: center;
 }
+
 .book-list li {
-  flex: 1 0 200px; /* This means that each book will take up at least 200px, but will grow to take up remaining space if available */
-}
-.book-cover {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.book-list li:hover {
+  transform: scale(1.05);
+}
+
+.book-cover {
+  width: 100%;
   height: 300px;
-  object-fit: cover; /* This will ensure that the image covers the entire space of the img element without distorting the aspect ratio */
+  object-fit: cover;
 }
-h2{
-  font-size: 45px;
-  font-family: Arial, Helvetica, sans-serif;
+
+.book-info {
+  padding: 15px;
 }
-h3{
-  font-family: Arial, Helvetica, sans-serif;
-  color: chocolate;
+
+.book-info h3 {
+  margin: 0;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.book-info p {
+  margin: 5px 0 0;
+  color: #555;
 }
 </style>

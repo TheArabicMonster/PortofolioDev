@@ -198,7 +198,7 @@ firstSelection input[type="submit"] {
 }
 
 .partie1 img {
-  width: 50%; /* Réduire la largeur de l'image */
+  width: 30%; /* Réduire la largeur de l'image */
   height: auto;
   border-radius: 10px;
   margin-bottom: 20px;

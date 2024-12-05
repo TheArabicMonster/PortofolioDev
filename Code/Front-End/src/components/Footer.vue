@@ -19,7 +19,7 @@
         </div>
         <div class="section" id="contact-us">
             <p>Contactez-nous :</p>
-            <a href="mailto:mateen.khaiy@eduvaud.ch" id="email">mateen.khaiy@eduvaud.ch</a>
+            <a href="mailto:mateen.khaiy@eduvaud.ch" id="email">mateen.khaiy@eduvaud.ch, julien.mares@eduvaud.ch</a>
         </div>        
     </div>
 </template>

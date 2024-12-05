@@ -1,28 +1,33 @@
 <template>
-  <div class="book">
+  <div class="book" v-if="catIdSelected == null">
     <h1>Liste des Livres</h1>
-    <div class="filter-container">
-      <label for="category">Filtrer par catégorie :</label>
-      <select v-model="selectedCategory" @change="filterBooks">
-        <option value="">Toutes les catégories</option>
+    <div class="filter-container" v-if="_aa == null">
+      <form @submit.prevent="getCatIdSelected">
+      <label for="categorySelect">Filtrer par catégorie :</label>
+      <select id="categorySelect" class="aa" v-model="_aa">
         <option v-for="category in categories" :key="category.idCategorie" :value="category.idCategorie">
           {{ category.nom }}
         </option>
       </select>
+      <input type="submit" value="Recherceher">
+    </form>
     </div>
-    <div v-for="category in categories" :key="category.idCategorie">
-      <h2>{{ category.nom }}</h2>
+  </div>   
+       
+
+    <div v-if="catIdSelected">
+
       <ul class="book-list">
-        <li v-for="book in filteredBooks(category.idCategorie)" :key="book.idLivre">
+        <li v-for="book in filteredBooks">
           <img class="book-cover" :src="book.imageCouverture" alt="Couverture du livre">
           <div class="book-info">
-            <h3>{{ book.titre }}</h3>
+            <h3 v-if="book.id_categorie == catIdSelected ">{{ book.titre }}</h3>
             <p>{{ findAuthor(book.idAuteur).nom }}</p>
           </div>
         </li>
       </ul>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -34,14 +39,26 @@ export default {
       books: [],
       categories: [],
       authors: [],
-      selectedCategory: ''
+      selectedCategory: '',
+      catIdSelected: null
     }
   },
   computed: {
-    filteredBooks() {
-      if (this.selectedCategory) {
-        return this.books.filter(book => book.id_categorie === this.selectedCategory);
+    getCatIdSelected(event){
+
+      if(this._aa){
+      this.catIdSelected = (this._aa)
+      }else{
+        this.catIdSelected =2
       }
+      console.log("cat id : "+this.catIdSelected)
+    },
+    filteredBooks() {
+      if (this.catIdSelected) {
+        return this.books.filter(book => book.id_categorie === this.catIdSelected);
+      }
+      console.log(" BBB "+books[0].id_categorie)
+
       return this.books;
     }
   },
@@ -65,6 +82,7 @@ export default {
       .get('http://localhost:3000/api/categories')
       .then((response) => {
         this.categories = response.data.data
+        console.log("ABCDE "+response.data.data[0].nom)
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des catégories :', error)

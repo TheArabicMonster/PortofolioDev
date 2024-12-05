@@ -54,7 +54,7 @@ export default {
 
         <form @submit="ajouter">
             <label for="titre">Titre</label>
-            <input type="text" v-model="titre" placeholder="Entrez le titre de l'ouvrage">
+            <input id="titre" type="text" v-model="titre" placeholder="Entrez le titre du livre">
 
 
             <label for="resume">resume</label>
@@ -64,20 +64,20 @@ export default {
             <input type="text" v-model="extrait" placeholder="Entrez un extrait du livre">
 
             <label for="nbPages">nbPages</label>
-            <input type="number" v-model="nbPages" placeholder="Entrez  le nombre de page">
+            <input type="number" v-model="nbPages" placeholder="Entrez le nombre de page">
 
             <label for="anneeEdition">anneeEdition</label>
-            <input type="number" v-model="anneeEdition" placeholder="Entrez  l'anneeEdition">
+            <input type="number" v-model="anneeEdition" placeholder="Entrez l'anneeEdition">
 
             <label for="imageCouverture">image de couverture</label>
             <input type="text" v-model="imageCouverture" placeholder="Entrez l'image de couverture">
             <label for="categorie">categorie</label>
-            <select v-model="categorie">
+            <select v-model="categorie" id="categorie">
                 <option v-for="categorie in categories" :key="categorie.idCategorie" :value="categorie.idCategorie">
                     {{ categorie.nom }}
                 </option>
             </select>
-            <select v-model="auteur">
+            <select v-model="auteur" id="auteur">
                 <option v-for="auteur in auteurs" :key="auteur.idAuteur" :value="auteur.idAuteur">
                     {{ auteur.nom }} {{ auteur.prenom }}
                 </option>

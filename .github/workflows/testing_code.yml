@@ -1,31 +1,13 @@
 name: CI/CD Workflow
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
 
 jobs:
-  check-keywords:
-    runs-on: ubuntu-latest
-    outputs:
-      trigger: ${{ steps.check.outputs.trigger }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Check for keywords in PR title
-        id: check
-        run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ (major|minor|patch) ]]; then
-            echo "::set-output name=trigger::true"
-          else
-            echo "::set-output name=trigger::false"
-          fi
-
   test-and-lint:
-    needs: check-keywords
-    if: needs.check-keywords.outputs.trigger == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -53,74 +35,3 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run
-
-  semver:
-    needs: test-and-lint
-    if: success()
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code with Token
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PAT }}
-
-      - name: Setup Git
-        run: |
-          git config user.name "user_tag"
-          git config user.email "tag@gmail.com"
-
-      - name: Get latest tag
-        run: |
-          git fetch --tags
-          LAST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v0.0.0")
-          echo "LAST_TAG=$LAST_TAG" >> $GITHUB_ENV
-
-      - name: Analyze commit message
-        run: |
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          if [[ "$COMMIT_MSG" == "Fix"* ]]; then
-            CHANGE_TYPE="PATCH"
-          elif [[ "$COMMIT_MSG" == "Patch"* ]]; then
-            CHANGE_TYPE="MINOR"
-          elif [[ "$COMMIT_MSG" == "Major"* ]]; then
-            CHANGE_TYPE="MAJOR"
-          else
-            CHANGE_TYPE=""
-          fi
-
-          echo "CHANGE_TYPE=$CHANGE_TYPE" >> $GITHUB_ENV
-
-      - name: Determine new version
-        run: |
-          MAJOR=$(echo "$LAST_TAG" | cut -d. -f1 | tr -d 'v')
-          MINOR=$(echo "$LAST_TAG" | cut -d. -f2)
-          PATCH=$(echo "$LAST_TAG" | cut -d. -f3)
-
-          if [[ "$CHANGE_TYPE" == "MAJOR" ]]; then
-            PATCH=0
-            MINOR=0
-            MAJOR=$((MAJOR + 1))
-          elif [[ "$CHANGE_TYPE" == "MINOR" ]]; then
-            PATCH=0
-            MINOR=$((MINOR + 1))
-          elif [[ "$CHANGE_TYPE" == "PATCH" ]]; then
-            PATCH=$((PATCH + 1))
-          fi
-
-          NEW_VERSION="v$MAJOR.$MINOR.$PATCH"
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      - name: Create new tag
-        run: |
-          if [[ "$NEW_VERSION" != "$LAST_TAG" ]]; then
-            git tag "$NEW_VERSION"
-            git push origin "$NEW_VERSION"
-            echo "$NEW_VERSION a été créé"
-          else
-            echo "Aucun tag n'a été ajouté"
-          fi
-
-      - name: Show new version
-        run: |
-          echo "$NEW_VERSION"

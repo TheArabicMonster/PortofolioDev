@@ -31,7 +31,6 @@ jobs:
         run: |
           cd Code
           npm install
-          npm run build
 
       - name: Package frontend and backend
         run: |

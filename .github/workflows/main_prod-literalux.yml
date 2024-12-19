@@ -25,6 +25,7 @@ jobs:
         run: |
           cd Code/Front-End
           npm install
+          npm run build
 
       - name: Build backend
         run: |
@@ -34,7 +35,7 @@ jobs:
       - name: Package frontend and backend
         run: |
           mkdir site
-          cp -r Code/Front-End site/frontend
+          cp -r Code/Front-End/dist site/backend/public
           cp -r Code site/backend
           cd site
           zip -r site-release.zip .

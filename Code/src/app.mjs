@@ -11,6 +11,7 @@ import { utilisateursRouter } from "./routes/utilisateurs.mjs";
 
 
 const app = express();
+app.use(express.static('public')); // Remplacez "public" par le dossier où vous avez copié les fichiers frontend
 
 app.use(express.json());
 app.use(cors());

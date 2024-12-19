@@ -35,8 +35,8 @@ jobs:
       - name: Package frontend and backend
         run: |
           mkdir site
-          cp -r Code/Front-End/dist site/backend/public
           cp -r Code site/backend
+          cp -r Code/Front-End/dist site/backend/public
           cd site
           zip -r site-release.zip .
 

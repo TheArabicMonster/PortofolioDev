@@ -25,7 +25,7 @@ jobs:
         run: |
           cd Code
           npm install
-          cd Front-end
+          cd Front-End
           npm install
 
       - name: Zip artifact for deployment

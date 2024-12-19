@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'PROD-Literalux'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_92E7CF65A23B4A109513D35D0164B5BE }}
-          package: ./site
+          package: .

@@ -29,16 +29,17 @@ const dbName = process.env.DB_NAME || 'literaluxdb';
 const dbPort = process.env.DB_PORT || 1433;
 
 // Configuration Sequelize
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-  host: dbHost,
-  port: dbPort,
+const sequelize = new Sequelize('literaluxdb', 'julien', 'ton_mot_de_passe', {
+  host: 'literaluxsrv.database.windows.net',
+  port: 1433,
   dialect: 'mssql',
   dialectOptions: {
-    encrypt: true, // Important pour Azure SQL
-    trustServerCertificate: false, // Vérifie le certificat SSL
+    encrypt: true,
+    trustServerCertificate: false,
   },
-  logging: false, // Désactiver les logs SQL
+  logging: console.log, // Active les logs SQL pour débuguer
 });
+
 
 // Tester la connexion
 sequelize.authenticate()

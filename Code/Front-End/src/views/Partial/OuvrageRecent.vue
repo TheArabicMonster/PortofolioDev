@@ -32,7 +32,7 @@ export default {
   mounted() {
     // Effectuer une requête GET pour récupérer la liste des livres depuis ton API
     axios
-      .get('http://localhost:3000/api/livres')
+      .get('/api/livres')
       .then((response) => {
         this.livres = response.data.data
       })
@@ -40,7 +40,7 @@ export default {
         console.error('Erreur lors de la récupération des livres :', error)
       })
     axios
-      .get('http://localhost:3000/api/auteurs')
+      .get('/api/auteurs')
       .then((response) => {
         this.authors = response.data.data
       })
@@ -49,7 +49,7 @@ export default {
       })
 
     axios
-      .get('http://localhost:3000/api/users')
+      .get('/api/users')
       .then((response) => {
         this.users = response.data.data
       })
@@ -59,7 +59,7 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get('http://localhost:3000/api/livres/recent')
+      const response = await axios.get('/api/livres/recent')
       console.log('Livres récupérés :', response.data)
       this.livres = response.data.data
     } catch (error) {

@@ -21,7 +21,7 @@ jobs:
       # Front-End Build Steps
       - name: Install dependencies and build Front-End
         run: |
-          cd Front-End
+          cd Code/Front-End
           npm install
           npm run build
 
@@ -35,7 +35,7 @@ jobs:
       - name: Prepare artifact for deployment
         run: |
           mkdir -p Code/src/public
-          cp -r Front-End/dist/* Code/src/public/
+          cp -r Code/Front-End/dist/* Code/src/public/
           cd Code/src
           zip -r ../../release.zip .
 

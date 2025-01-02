@@ -29,7 +29,7 @@ const dbName = process.env.DB_NAME || 'literaluxdb';
 const dbPort = process.env.DB_PORT || 1433;
 
 // Configuration Sequelize
-const sequelize = new Sequelize('literaluxdb', 'julien', 'ton_mot_de_passe', {
+const sequelize = new Sequelize('literaluxdb', 'julien', 'aabb1234?', {
   host: 'literaluxsrv.database.windows.net',
   port: 1433,
   dialect: 'mssql',

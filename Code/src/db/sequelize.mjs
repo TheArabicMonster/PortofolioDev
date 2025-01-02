@@ -17,19 +17,35 @@ import { commentaireModel } from "../models/commentaires.mjs";
 import { auteurModel } from "../models/auteurs.mjs";
 import { categorieModel } from "../models/categories.mjs";
 import { editeursModel } from "../models/editeurs.mjs";
+import dotenv from 'dotenv';
+dotenv.config();
 
 
-const sequelize = new Sequelize(
-  "db_livres", // Nom de la DB qui doit exister
-  "root", // Nom de l'utilisateur
-  "root", // Mot de passe de l'utilisateur
-  {
-    host: "localhost",
-    port: "3306",// pour les conteneurs docker MySQL
-    dialect: "mysql",
-    logging: false,
-  }
-);
+// Variables d'environnement (déjà définies dans Azure)
+const dbHost = process.env.DB_HOST || 'literaluxsrv.database.windows.net';
+const dbUser = process.env.DB_USER || 'julien';
+const dbPassword = process.env.DB_PASSWORD || 'aabb1234?';
+const dbName = process.env.DB_NAME || 'literaluxdb';
+const dbPort = process.env.DB_PORT || 1433;
+
+// Configuration Sequelize
+const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+  host: dbHost,
+  port: dbPort,
+  dialect: 'mssql',
+  dialectOptions: {
+    encrypt: true, // Important pour Azure SQL
+    trustServerCertificate: false, // Vérifie le certificat SSL
+  },
+  logging: false, // Désactiver les logs SQL
+});
+
+// Tester la connexion
+sequelize.authenticate()
+  .then(() => console.log('Connexion à la base de données établie avec succès.'))
+  .catch(err => console.error('Impossible de se connecter à la base de données :', err));
+
+
 
 // Creation des tables a partir des modeles
 const Livre = livreModel(sequelize, DataTypes);

@@ -1,3 +1,4 @@
+@ -0,0 +1,62 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
@@ -21,30 +22,20 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Build frontend
+      - name: npm install, build, and test
         run: |
-          cd Code/Front-End
           npm install
-          npm run build
+          npm run build --if-present
+          npm run test --if-present
 
-      - name: Build backend
-        run: |
-          cd Code
-          npm install
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
 
-      - name: Package frontend and backend
-        run: |
-          mkdir site
-          cp -r Code site/backend
-          cp -r Code/Front-End/dist site/backend/public
-          cd site
-          zip -r site-release.zip .
-
-      - name: Upload artifact
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: site-artifact
-          path: site/site-release.zip
+          name: node-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,18 +43,21 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
-      - name: Download artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: site-artifact
+          name: node-app
 
-      - name: Unzip artifact
-        run: unzip site-release.zip
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
 
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'PROD-Literalux'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_92E7CF65A23B4A109513D35D0164B5BE }}
           package: .

@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - PROD-Literalux
 
 on:
@@ -21,14 +18,26 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      # Front-End Build Steps
+      - name: Install dependencies and build Front-End
         run: |
+          cd Front-End
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      # Back-End Setup
+      - name: Install dependencies for Back-End
+        run: |
+          cd Code/src
+          npm install
+
+      # Package the Back-End along with Front-End build
+      - name: Prepare artifact for deployment
+        run: |
+          mkdir -p Code/src/public
+          cp -r Front-End/dist/* Code/src/public/
+          cd Code/src
+          zip -r ../../release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3

@@ -27,7 +27,7 @@ export default {
   methods: {
     async getBooksById(id) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/livres/${id}`)
+        const response = await axios.get(`/api/livres/${id}`)
         this.livres = response.data
         /* if (this.livres != null) {
           console.log('aaaa' + this.livres.data.resume);
@@ -43,12 +43,12 @@ export default {
     async getComments(commentId) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/commentaires/livre/${commentId}`
+          `/api/commentaires/livre/${commentId}`
         )
         const response2 = await axios.get(
-          `http://localhost:3000/api/commentaires/livre/${commentId}/moyenneA`
+          `/api/commentaires/livre/${commentId}/moyenneA`
         )
-        //const response = await axios.get(`http://localhost:3000/api/livres/${commentId}/commentaires`)
+        //const response = await axios.get(`/api/livres/${commentId}/commentaires`)
         this.commentaires = response.data
         this.moyenneA = response2.data
       } catch (error) {
@@ -60,7 +60,7 @@ export default {
     async getAuthors(authorID) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/auteurs/${authorID}`
+          `/api/auteurs/${authorID}`
 
         )
         this.auteurs = response.data
@@ -78,7 +78,7 @@ export default {
       console.log(this.livreId)
     },
     async getLivres() {
-      const response = await axios.get(`http://localhost:3000/api/livres`)
+      const response = await axios.get(`/api/livres`)
       this.allLivres = response.data.data
     }
   }

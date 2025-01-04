@@ -49,7 +49,7 @@ export default {
     },
     async fetchBooks() {
       try {
-        const response = await axios.get('http://localhost:3000/api/livres');
+        const response = await axios.get('/api/livres');
         this.books = response.data.data;
       } catch (error) {
         console.error('Erreur lors de la récupération des livres :', error);
@@ -57,7 +57,7 @@ export default {
     },
     async fetchCategories() {
       try {
-        const response = await axios.get('http://localhost:3000/api/categories');
+        const response = await axios.get('/api/categories');
         this.categories = response.data.data;
       } catch (error) {
         console.error('Erreur lors de la récupération des catégories :', error);
@@ -65,7 +65,7 @@ export default {
     },
     async fetchAuthors() {
       try {
-        const response = await axios.get('http://localhost:3000/api/auteurs');
+        const response = await axios.get('/api/auteurs');
         this.authors = response.data.data;
       } catch (error) {
         console.error('Erreur lors de la récupération des auteurs :', error);

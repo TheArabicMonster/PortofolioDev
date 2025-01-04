@@ -16,7 +16,7 @@ export default {
             event.preventDefault() // Empêche le formulaire de se soumettre normalement
             try 
             {
-                const response = await axios.post(`http://localhost:3000/api/login`, {
+                const response = await axios.post(`/api/login`, {
                     pseudo: this.username,
                     motDePasse: this.password
                 })

@@ -21,7 +21,7 @@ export default {
         async ajouter(event) {
             event.preventDefault()
 
-            const response = await axios.post(`http://localhost:3000/api/livres`, {
+            const response = await axios.post(`/api/livres`, {
                 titre: this.titre,
                 id_categorie: this.categorie,
                 extrait: this.extrait,
@@ -36,11 +36,11 @@ export default {
         },
 
         async getCategories() {
-            const response = await axios.get(`http://localhost:3000/api/categories`)
+            const response = await axios.get(`/api/categories`)
             this.categories = response.data.data
         },
         async getAuthors() {
-            const response = await axios.get(`http://localhost:3000/api/auteurs`)
+            const response = await axios.get(`/api/auteurs`)
             this.auteurs = response.data.data
         }
     }

@@ -15,7 +15,7 @@ export default {
     async envoyer(event) {
       event.preventDefault() // Empêche le formulaire de se soumettre normalement
 
-      await axios.post(`http://localhost:3000/api/commentaires`, {
+      await axios.post(`/api/commentaires`, {
         contenu: this.contenu,
         appreciation: this.appreciation,
         idLivre: this.livreId
@@ -26,7 +26,7 @@ export default {
     },
     async getMoyenneAppreciation() {
       try {
-        const response = await axios.get(`http://localhost:3000/api/commentaires/livre/${this.livreId}/moyenneA`)
+        const response = await axios.get(`/api/commentaires/livre/${this.livreId}/moyenneA`)
         this.moyenneAppreciation = response.data.moyenneAppreciation
         this.nombreAppreciations = response.data.nombreAppreciations
       } catch (error) {

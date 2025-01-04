@@ -23,7 +23,6 @@ jobs:
 
   test-and-lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -48,7 +47,17 @@ jobs:
         run: npx wait-on http://localhost:3000
 
       - name: Run Cypress tests
+        id: cypress
         run: npx cypress run
+
+      - name: Check test results
+        id: check-results
+        run: |
+          if grep -q "ERROR" cypress/results.txt; then
+            echo "errors=true" >> $GITHUB_ENV
+          else
+            echo "errors=false" >> $GITHUB_ENV
+          fi
 
   semver:
     needs: test-and-lint
@@ -112,3 +121,25 @@ jobs:
       - name: Show new version
         run: |
           echo "$NEW_VERSION"
+
+  trigger-preprod:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    if: needs.test-and-lint.outputs.errors == 'true'
+    steps:
+      - name: Trigger Preprod Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: main_preprod-literalux.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  trigger-prod:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    if: needs.test-and-lint.outputs.errors == 'false'
+    steps:
+      - name: Trigger Prod Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: main_prod-literalux.yml
+          token: ${{ secrets.GITHUB_TOKEN }}

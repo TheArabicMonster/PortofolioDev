@@ -10,7 +10,7 @@ describe('Search Functionality', () => {
     cy.get('button').contains('Rechercher').click()
 
     // Vérifier que la page de résultats de recherche est affichée
-    cy.url().should('include', '/search?q=comte')
+    cy.url().should('include', '/search?q=erreur')
 
     // Vérifier que les résultats de recherche contiennent le terme recherché
     cy.get('h1').should('contain', 'Résultats de recherche pour "comte"')

@@ -1,0 +1,72 @@
+3f94373 - TheArabicMonster, 2 days ago : feat(redirection workflow): execute un worklow de prod en fonction du résultat des test
+5dbe13d - TheArabicMonster, 2 days ago : delete(deploy workflows): fichier vides inutilisé
+e11323e - JulienETML-hub, 2 days ago : Update main_preprod-literalux.yml
+f0f19c8 - JulienETML-hub, 2 days ago : Update main_preprod-literalux.yml
+5313ed1 - Nomade, 2 days ago : Add or update the Azure App Service build and deployment workflow config
+3b30673 - JulienETML-hub, 2 days ago : refactor : (path api) refactorisation des chemins pr accéder aux données de l'api
+2e13fc7 - JulienETML-hub, 4 days ago : Update sequelize.mjs
+7d46379 - JulienETML-hub, 4 days ago : update pr faire marcher api sur azure
+4e398f8 - JulienETML-hub, 4 days ago : add dbservice szure
+29662eb - JulienETML-hub, 4 days ago : Update OuvrageRecent.vue
+fd5d9c7 - JulienETML-hub, 4 days ago : Update app.mjs
+ee76c18 - JulienETML-hub, 4 days ago : Update vite.config.js
+fae254b - JulienETML-hub, 4 days ago : Update main_prod-literalux.yml
+26f5fd7 - JulienETML-hub, 4 days ago : build: ajout package.json ds src
+0db57b4 - JulienETML-hub, 4 days ago : Update main_prod-literalux.yml
+7739b44 - JulienETML-hub, 4 days ago : Update main_prod-literalux.yml
+5ee778a - JulienETML-hub, 4 days ago : Refactor : Remise du workflow de base générer par Azure
+e990713 - JulienETML-hub, 3 weeks ago : update jnvtrl
+42b345d - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+96bb95e - JulienETML-hub, 3 weeks ago : update
+ab7a581 - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+80431e1 - JulienETML-hub, 3 weeks ago : Update index.html
+1f73cc6 - JulienETML-hub, 3 weeks ago : Update index.html
+5120c5a - JulienETML-hub, 3 weeks ago : Update index.html
+59adc40 - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+1f6f020 - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+d983503 - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+c34481d - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+e69bc60 - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+3b9298c - JulienETML-hub, 3 weeks ago : Update main_prod-literalux.yml
+68861ee - Nomade, 4 weeks ago : (doc): journal de travail jour 1
+30b1953 - Nomade, 4 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+b898742 - Nomade, 4 weeks ago : feat(workflow): semver
+b1ea748 - Nomade, 4 weeks ago : Add or update the Azure App Service build and deployment workflow config
+891968f - Nomade, 4 weeks ago : refactor(workflow): workflow trigger avec manuel action pour tester
+f030e65 - Nomade, 4 weeks ago : feat(workfile): test unitaire cypress
+99ef50f - Nomade, 4 weeks ago : Create deploy_production.yml
+85b6aa5 - Nomade, 4 weeks ago : Create deploy_staging.yml
+2a490f4 - Nomade, 4 weeks ago : Create testing_code.yml
+6be5b3a - Nomade, 4 weeks ago : (doc): introduction
+32b3a23 - Nomade, 4 weeks ago : (doc): renommage des documents
+4596d0a - Nomade, 5 weeks ago : (doc): pdf du rapport
+cd4425a - JulienETML-hub, 5 weeks ago : Doc : (jnvtrl) Update jnvtrl
+b770364 - JulienETML-hub, 5 weeks ago : Doc : (portfolio) Petites modifications
+fc6e6c2 - JulienETML-hub, 5 weeks ago : Doc : (portfolio) Ajout journal de commits
+660a1fe - JulienETML-hub, 5 weeks ago : Doc : (Portfolio) Ajout en tête
+82df34b - JulienETML-hub, 5 weeks ago : Doc : (portfolio) Ajout conclusions
+c24cd9e - JulienETML-hub, 5 weeks ago : Update : (footer) Ajout contact dans footer
+c57ebac - JulienETML-hub, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+72225ff - JulienETML-hub, 5 weeks ago : Refactor (DetailsLivre) Redimensionnement taille image
+f2eb883 - Nomade, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+ffc7232 - Nomade, 5 weeks ago : (feat): refactorisation du composant BookList pour un meilleur filtrage des catégories et des améliorations de l'interface utilisateur
+c2750dc - JulienETML-hub, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+2ccd188 - JulienETML-hub, 5 weeks ago : Doc : (jnvtrl) Update jnvtrl
+ae21e18 - JulienETML-hub, 5 weeks ago : Doc : (portfolio) Ajout du portfolio (rapport)
+c523293 - Nomade, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+0462e33 - Nomade, 5 weeks ago : (feat): mettre à jour les composants de l'interface utilisateur pour améliorer la cohérence du style et de la présentation dans l'ensemble de l'application (fait en majorité par ia)
+d943770 - JulienETML-hub, 5 weeks ago : Create Journal-de-Travail_JulMares.xlsx
+aae7639 - Nomade, 5 weeks ago : (feat) : refactorisation du composant FormAppreciation pour inclure l'affichage de la note moyenne et améliorer la structure du formulaire
+183135e - JulienETML-hub, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+4ffb6c8 - JulienETML-hub, 5 weeks ago : refactor : renommage variable
+d01a4b0 - Nomade, 5 weeks ago : Merge branch 'main' of https://github.com/TheArabicMonster/PortofolioDev
+1927636 - Nomade, 5 weeks ago : (feat): mise à jour de la configuration de Cypress et ajout de tests e2e pour l'ajout de livres
+573aefb - JulienETML-hub, 5 weeks ago : Feat : (BookList.vue) Ajout d'un triage des livres par catégories
+d3b788f - TheArabicMonster, 5 weeks ago : (feat): mise à jour de la configuration Cypress et ajout de tests pour la fonctionnalité de recherche (wip)
+0129547 - TheArabicMonster, 5 weeks ago : (feat): ajout d'une option pour filtrer les livres par catégorie sélectionnée
+1fe20f2 - TheArabicMonster, 5 weeks ago : (feat): ajout d'un filtre par catégorie pour la liste des livres
+44693f6 - TheArabicMonster, 5 weeks ago : (feat): ajout d'une fonctionnalité de recherche et d'une page de résultats pour les livres
+e161fde - TheArabicMonster, 5 weeks ago : (feat): ajout cypress pour faire des test (wip)
+d0baacf - Nomade, 6 weeks ago : (doc): jnltrav matkhalil jour 1
+638eef3 - JulienETML-hub, 6 weeks ago : Ajout projet Litteralux
+1e1287f - Nomade, 6 weeks ago : Initial commit
